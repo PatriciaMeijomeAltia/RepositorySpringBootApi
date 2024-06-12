@@ -42,5 +42,10 @@ public class TareasController {
         return ResponseEntity.ok(tareasService.modificarTarea(id,tareas));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> verTareaID(@PathVariable long id ) {
+
+        return ResponseEntity.ok(tareasService.obtenerTareaPorId(id));
+    }
 
 }

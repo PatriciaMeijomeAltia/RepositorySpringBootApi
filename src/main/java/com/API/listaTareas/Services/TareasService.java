@@ -8,7 +8,7 @@ public interface TareasService {
 
     List <Tareas> obtenerTareas();
 
-    String obtenerTareaPorId(Long id) ;
+    Object obtenerTareaPorId(Long id) ;
 
     String crearTarea(Tareas tarea);
 

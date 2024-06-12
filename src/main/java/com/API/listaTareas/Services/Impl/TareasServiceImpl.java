@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TareasServiceImpl implements TareasService {
@@ -23,8 +24,16 @@ public class TareasServiceImpl implements TareasService {
     }
 
     @Override
-    public String obtenerTareaPorId(Long id) {
-        return null;
+    public Object obtenerTareaPorId(Long id) {
+
+        Optional<Tareas> tareaOptional = tareasRepository.findById(id);
+
+        if (tareaOptional.isPresent()) {
+           // Tareas tarea = tareaOptional.get();
+            return tareaOptional.get();
+        } else {
+            return "Tarea no encontrada";
+        }
     }
 
     @Override
