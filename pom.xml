@@ -40,12 +40,7 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- configuración de Swagger/OpenAPI -->
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.6.9</version>
-		</dependency>
+
 
 		<!-- Lombok -->
 		<dependency>
