@@ -4,6 +4,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### Maven ###
+jakarta.xml.bind/
+jakarta.activation/
+
 ### STS ###
 .apt_generated
 .classpath
@@ -14,7 +18,7 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea/
+.idea
 *.iws
 *.iml
 *.ipr
@@ -31,3 +35,5 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
