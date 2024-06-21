@@ -1,4 +1,4 @@
-package com.API.listaTareas.Modelo;
+package com.API.listaTareas.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Tareas {
+public class Tarea {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,11 +69,11 @@ public class Tareas {
         this.fechaFin = fechaFin;
     }
 
-    public Tareas() {
+    public Tarea() {
 
     }
 
-    public Tareas(String nombreTarea, String descripcionTarea, String estado, String personaAsignada, String fechaInicio, String fechaFin) {
+    public Tarea(String nombreTarea, String descripcionTarea, String estado, String personaAsignada, String fechaInicio, String fechaFin) {
         this.nombreTarea = nombreTarea;
         this.descripcionTarea = descripcionTarea;
         this.estado = estado;
