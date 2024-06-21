@@ -37,3 +37,7 @@ build/
 .vscode/
 
 
+### SWAGGER ###
+SwaggerConfiguration.java
+
+
