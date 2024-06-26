@@ -41,7 +41,8 @@
 		</dependency>
 
 
-
+		<!--dependencias swagger -->
+		<!-- SpringDoc OpenAPI -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-ui</artifactId>

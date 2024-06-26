@@ -1,7 +1,8 @@
 package com.API.listaTareas.mapper;
 
-import com.API.listaTareas.Modelo.Tareas;
+
 import com.API.listaTareas.dto.TareaDto;
+import com.API.listaTareas.model.Tarea;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -12,9 +13,9 @@ public interface TareaMapper {
 
     TareaMapper INSTANCE = Mappers.getMapper(TareaMapper.class);
 
-    Tareas toEntity(TareaDto tareaDto);
+    Tarea toEntity(TareaDto tareaDto);
 
-    TareaDto toDTO(Tareas tareas);
+    TareaDto toDTO(Tarea tareas);
 
-    List<TareaDto> toDtoList(List<Tareas> tareas);
+    List<TareaDto> toDtoList(List<Tarea> tareas);
 }
