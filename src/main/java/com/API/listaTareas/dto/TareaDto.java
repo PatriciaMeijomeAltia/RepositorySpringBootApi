@@ -1,6 +1,5 @@
-package com.API.listaTareas.Modelo;
+package com.API.listaTareas.dto;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -8,11 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tareas {
+public class TareaDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +21,5 @@ public class Tareas {
     private String personaAsignada;
     private String fechaInicio;
     private String fechaFin;
-
-
 
 }

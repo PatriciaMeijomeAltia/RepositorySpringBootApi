@@ -3,6 +3,7 @@ package com.API.listaTareas.Controller;
 
 import com.API.listaTareas.Modelo.Tareas;
 import com.API.listaTareas.Services.TareasService;
+import com.API.listaTareas.dto.TareaDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,16 +19,16 @@ public class TareasController {
 
 
     @GetMapping
-    public ResponseEntity<List<Tareas>> verTareas() {
+    public ResponseEntity<List<TareaDto>> verTareas() {
 
-        List<Tareas> listaTareas = tareasService.obtenerTareas();
+        List<TareaDto> listaTareas = tareasService.obtenerTareas();
         return ResponseEntity.ok(listaTareas);
     }
 
     @PostMapping
-    public ResponseEntity<String> crearTarea(@RequestBody Tareas tareas ) {
+    public ResponseEntity<String> crearTarea(@RequestBody TareaDto tareaDto ) {
 
-        return ResponseEntity.ok(tareasService.crearTarea(tareas));
+        return ResponseEntity.ok(tareasService.crearTarea(tareaDto));
     }
 
     @DeleteMapping("/{id}")

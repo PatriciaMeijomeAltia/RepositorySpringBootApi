@@ -2,6 +2,8 @@ package com.API.listaTareas.Services.Impl;
 
 import com.API.listaTareas.Modelo.Tareas;
 import com.API.listaTareas.Services.TareasService;
+import com.API.listaTareas.dto.TareaDto;
+import com.API.listaTareas.mapper.TareaMapper;
 import com.API.listaTareas.repositorio.TareasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +19,10 @@ public class TareasServiceImpl implements TareasService {
 
 
     @Override
-    public List<Tareas> obtenerTareas() {
+    public List<TareaDto> obtenerTareas() {
 
-        return tareasRepository.findAll();
+        List<Tareas> tareas = tareasRepository.findAll();
+        return TareaMapper.INSTANCE.toDtoList(tareas);
 
     }
 
@@ -37,9 +40,11 @@ public class TareasServiceImpl implements TareasService {
     }
 
     @Override
-    public String crearTarea(Tareas tarea) {
-       tareasRepository.save(tarea);
-       return "Tarea creada";
+    public String crearTarea(TareaDto tareaDto) {
+
+        Tareas tarea = TareaMapper.INSTANCE.toEntity(tareaDto);
+        tareasRepository.save(tarea);
+        return "Tarea creada";
 
     }
 
