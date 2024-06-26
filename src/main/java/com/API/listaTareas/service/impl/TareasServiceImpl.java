@@ -1,10 +1,8 @@
 package com.API.listaTareas.service.impl;
 
-<<<<<<< HEAD:src/main/java/com/API/listaTareas/service/impl/TareasServiceImpl.java
+
 import com.API.listaTareas.dto.TareaDto;
 import com.API.listaTareas.mapper.TareaMapper;
-=======
->>>>>>> master:src/main/java/com/API/listaTareas/Services/Impl/TareasServiceImpl.java
 import com.API.listaTareas.model.Tarea;
 import com.API.listaTareas.service.TareasService;
 import com.API.listaTareas.repository.TareasRepository;
@@ -24,7 +22,6 @@ public class TareasServiceImpl implements TareasService {
 
 
     @Override
-
     public List<TareaDto> obtenerTareas() {
 
         List<Tarea> tareas = tareasRepository.findAll();
