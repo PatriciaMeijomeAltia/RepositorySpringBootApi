@@ -1,33 +1,33 @@
-package com.API.listaTareas.Controller;
+package com.API.listaTareas.controller;
 
 
-import com.API.listaTareas.Modelo.Tareas;
-import com.API.listaTareas.Services.TareasService;
+import com.API.listaTareas.model.Tarea;
+import com.API.listaTareas.service.TareasService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
-@RequestMapping("/listaTareas")
+@RequestMapping("/lista_Tareas")
 @RequiredArgsConstructor
-public class TareasController {
+public class TareaController {
 
     @Autowired
     private TareasService tareasService;
 
 
     @GetMapping
-    public ResponseEntity<List<Tareas>> verTareas() {
+    public ResponseEntity<List<Tarea>> verTareas() {
 
-        List<Tareas> listaTareas = tareasService.obtenerTareas();
+        List<Tarea> listaTareas = tareasService.obtenerTareas();
         return ResponseEntity.ok(listaTareas);
     }
 
     @PostMapping
-    public ResponseEntity<String> crearTarea(@RequestBody Tareas tareas ) {
+    public ResponseEntity<String> crearTarea(@RequestBody Tarea tareas ) {
 
         return ResponseEntity.ok(tareasService.crearTarea(tareas));
     }
@@ -39,7 +39,7 @@ public class TareasController {
     }
 
     @PutMapping ("/{id}")
-    public ResponseEntity<?> modificarTarea(@PathVariable long id,@RequestBody Tareas tareas ) {
+    public ResponseEntity<?> modificarTarea(@PathVariable long id,@RequestBody Tarea tareas ) {
 
         return ResponseEntity.ok(tareasService.modificarTarea(id,tareas));
     }

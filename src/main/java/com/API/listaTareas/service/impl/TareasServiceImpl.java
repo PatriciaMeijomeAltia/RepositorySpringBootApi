@@ -1,13 +1,15 @@
-package com.API.listaTareas.Services.Impl;
+package com.API.listaTareas.service.impl;
 
-import com.API.listaTareas.Modelo.Tareas;
-import com.API.listaTareas.Services.TareasService;
-import com.API.listaTareas.repositorio.TareasRepository;
+import com.API.listaTareas.model.Tarea;
+import com.API.listaTareas.service.TareasService;
+import com.API.listaTareas.repository.TareasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
+//import java.util.Optional;
 
 @Service
 public class TareasServiceImpl implements TareasService {
@@ -17,49 +19,43 @@ public class TareasServiceImpl implements TareasService {
 
 
     @Override
-    public List<Tareas> obtenerTareas() {
+    public List<Tarea> obtenerTareas() {
 
         return tareasRepository.findAll();
 
     }
 
     @Override
-    public Object obtenerTareaPorId(Long id) {
+    public Tarea obtenerTareaPorId(Long id) {
 
-        Optional<Tareas> tareaOptional = tareasRepository.findById(id);
+        Optional<Tarea> tareaOptional = tareasRepository.findById(id);
 
-        if (tareaOptional.isPresent()) {
-           // Tareas tarea = tareaOptional.get();
-            return tareaOptional.get();
-        } else {
-            return "Tarea no encontrada";
-        }
+        return tareaOptional.orElseThrow(() ->
+                new NoSuchElementException("Tarea con el ID :" + id+ "no existe"));
+
     }
 
     @Override
-    public String crearTarea(Tareas tarea) {
+    public String crearTarea(Tarea tarea) {
        tareasRepository.save(tarea);
        return "Tarea creada";
 
     }
 
     @Override
-    public String eliminarTarea(Long id) {
+    public Boolean eliminarTarea(Long id) {
 
-        if (tareasRepository.existsById(id)) {
+       return tareasRepository.findById(id).map(tarea -> {
+            tareasRepository.delete(tarea);
+            return true;
+        }).orElse(false);
 
-            tareasRepository.deleteById(id);
-            return "Tarea eliminada";
-        }
-        else {
-            return "Id no esxit";
-        }
     }
 
     @Override
-    public String modificarTarea(Long id,Tareas tarea) {
+    public String modificarTarea(Long id, Tarea tarea) {
 
-        Tareas modTarea = tareasRepository.findById(id).get();
+        Tarea modTarea = tareasRepository.findById(id).get();
 
      if (modTarea!= null)
       {

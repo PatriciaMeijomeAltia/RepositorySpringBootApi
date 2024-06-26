@@ -1,4 +1,4 @@
-package com.API.listaTareas.Modelo;
+package com.API.listaTareas.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,8 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tareas {
-
+public class Tarea {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTarea;
