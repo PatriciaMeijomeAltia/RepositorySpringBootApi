@@ -21,7 +21,6 @@ public class TareasServiceImpl implements TareasService {
 
 
     @Override
-
     public List<TareaDto> obtenerTareas() {
 
         List<Tarea> tareas = tareasRepository.findAll();
@@ -30,12 +29,14 @@ public class TareasServiceImpl implements TareasService {
     }
 
     @Override
-    public Tarea obtenerTareaPorId(Long id) {
+    public TareaDto obtenerTareaPorId(Long id) {
 
         Optional<Tarea> tareaOptional = tareasRepository.findById(id);
 
-        return tareaOptional.orElseThrow(() ->
+        Tarea tarea = tareaOptional.orElseThrow(() ->
                 new NoSuchElementException("Tarea con el ID :" + id+ "no existe"));
+
+        return TareaMapper.INSTANCE.toDTO(tarea);
 
     }
 
@@ -59,8 +60,9 @@ public class TareasServiceImpl implements TareasService {
     }
 
     @Override
-    public String modificarTarea(Long id, Tarea tarea) {
+    public String modificarTarea(Long id, TareaDto tareaDto) {
 
+        Tarea tarea = TareaMapper.INSTANCE.toEntity(tareaDto);
         Tarea modTarea = tareasRepository.findById(id).get();
 
      if (modTarea!= null)
