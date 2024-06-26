@@ -1,11 +1,15 @@
 package com.API.listaTareas.service;
 
+<<<<<<< HEAD
 import com.API.listaTareas.dto.TareaDto;
+=======
+>>>>>>> master
 import com.API.listaTareas.model.Tarea;
 
 import java.util.List;
 
 public interface TareasService {
+
 
     List <TareaDto> obtenerTareas();
 
@@ -16,6 +20,7 @@ public interface TareasService {
     Boolean eliminarTarea(Long id) ;
 
     String modificarTarea(Long id, TareaDto tareaDto) ;
+
 
 
 }
