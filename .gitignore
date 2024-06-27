@@ -4,6 +4,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### Maven ###
+jakarta.xml.bind/
+jakarta.activation/
+
 ### STS ###
 .apt_generated
 .classpath
@@ -31,3 +35,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+### SWAGGER ###
+SwaggerConfiguration.java
+
+
