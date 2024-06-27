@@ -1,20 +1,24 @@
 package com.API.listaTareas.service;
 
-import com.API.listaTareas.model.Tarea;
+
+import com.API.listaTareas.dto.TareaDto;
+
 
 import java.util.List;
 
 public interface TareasService {
 
-    List <Tarea> obtenerTareas();
 
-    Tarea obtenerTareaPorId(Long id) ;
+    List <TareaDto> obtenerTareas();
 
-    String crearTarea(Tarea tarea);
+    TareaDto obtenerTareaPorId(Long id) ;
 
-    Boolean eliminarTarea(Long id) ;
+    TareaDto crearTarea(TareaDto tareaDto);
 
-    String modificarTarea(Long id, Tarea tarea) ;
+    TareaDto eliminarTarea(Long id) ;
+
+    TareaDto modificarTarea(Long id, TareaDto tareaDto) ;
+
 
 
 }

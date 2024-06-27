@@ -1,18 +1,20 @@
 package com.API.listaTareas.controller;
 
 
+import com.API.listaTareas.dto.TareaDto;
+import com.API.listaTareas.exception.MensajeError;
 import com.API.listaTareas.model.Tarea;
 import com.API.listaTareas.service.TareasService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/lista_Tareas")
-@RequiredArgsConstructor
+@RequestMapping("/lista_tareas")
 public class TareaController {
 
     @Autowired
@@ -20,34 +22,48 @@ public class TareaController {
 
 
     @GetMapping
-    public ResponseEntity<List<Tarea>> verTareas() {
+    public ResponseEntity<List<TareaDto>> verTareas() {
 
-        List<Tarea> listaTareas = tareasService.obtenerTareas();
-        return ResponseEntity.ok(listaTareas);
+        return ResponseEntity.ok(tareasService.obtenerTareas());
     }
 
     @PostMapping
-    public ResponseEntity<String> crearTarea(@RequestBody Tarea tareas ) {
+    public ResponseEntity<TareaDto> crearTarea(@RequestBody TareaDto tareaDto ) {
 
-        return ResponseEntity.ok(tareasService.crearTarea(tareas));
+        return ResponseEntity.ok(tareasService.crearTarea(tareaDto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminarTarea(@PathVariable long id ) {
+    public ResponseEntity<TareaDto> eliminarTarea(@PathVariable long id ) {
 
         return ResponseEntity.ok(tareasService.eliminarTarea(id));
     }
 
     @PutMapping ("/{id}")
-    public ResponseEntity<?> modificarTarea(@PathVariable long id,@RequestBody Tarea tareas ) {
+    public ResponseEntity<?> modificarTarea(@PathVariable long id,@RequestBody TareaDto tareaDto ) {
 
-        return ResponseEntity.ok(tareasService.modificarTarea(id,tareas));
+        try {
+            return ResponseEntity.ok(tareasService.modificarTarea(id, tareaDto));
+        }catch (NoSuchElementException e) {
+
+            String mensajeError = e.getMessage();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mensajeError);
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> verTareaID(@PathVariable long id ) {
+    public ResponseEntity<TareaDto> verTareaID(@PathVariable long id ) {
 
-        return ResponseEntity.ok(tareasService.obtenerTareaPorId(id));
+
+        try {
+            TareaDto tarea = tareasService.obtenerTareaPorId(id);
+
+            return ResponseEntity.ok(tarea);
+
+        } catch (NoSuchElementException e) {
+
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }
