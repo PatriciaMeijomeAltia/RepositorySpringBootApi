@@ -13,11 +13,11 @@ public interface TareasService {
 
     TareaDto obtenerTareaPorId(Long id) ;
 
-    String crearTarea(TareaDto tareaDto);
+    TareaDto crearTarea(TareaDto tareaDto);
 
     Boolean eliminarTarea(Long id) ;
 
-    String modificarTarea(Long id, TareaDto tareaDto) ;
+    TareaDto modificarTarea(Long id, TareaDto tareaDto) ;
 
 
 

@@ -28,7 +28,7 @@ public class TareaController {
     }
 
     @PostMapping
-    public ResponseEntity<String> crearTarea(@RequestBody TareaDto tareaDto ) {
+    public ResponseEntity<TareaDto> crearTarea(@RequestBody TareaDto tareaDto ) {
 
         return ResponseEntity.ok(tareasService.crearTarea(tareaDto));
     }
@@ -40,7 +40,7 @@ public class TareaController {
     }
 
     @PutMapping ("/{id}")
-    public ResponseEntity<String> modificarTarea(@PathVariable long id,@RequestBody TareaDto tareaDto ) {
+    public ResponseEntity<TareaDto> modificarTarea(@PathVariable long id,@RequestBody TareaDto tareaDto ) {
 
         return ResponseEntity.ok(tareasService.modificarTarea(id,tareaDto));
     }
