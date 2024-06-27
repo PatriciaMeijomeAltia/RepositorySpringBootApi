@@ -41,16 +41,14 @@
 		</dependency>
 
 
-		<!--dependencias swagger -->
-		<!-- SpringDoc OpenAPI -->
+
+		<!-- Lombok -->
 		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>2.1.0</version>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.26</version>
+			<scope>provided</scope>
 		</dependency>
-
-
-
 
 
 	</dependencies>
