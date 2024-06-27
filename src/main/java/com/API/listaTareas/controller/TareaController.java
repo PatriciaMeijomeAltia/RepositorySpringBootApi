@@ -34,15 +34,21 @@ public class TareaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> eliminarTarea(@PathVariable long id ) {
+    public ResponseEntity<TareaDto> eliminarTarea(@PathVariable long id ) {
 
         return ResponseEntity.ok(tareasService.eliminarTarea(id));
     }
 
     @PutMapping ("/{id}")
-    public ResponseEntity<TareaDto> modificarTarea(@PathVariable long id,@RequestBody TareaDto tareaDto ) {
+    public ResponseEntity<?> modificarTarea(@PathVariable long id,@RequestBody TareaDto tareaDto ) {
 
-        return ResponseEntity.ok(tareasService.modificarTarea(id,tareaDto));
+        try {
+            return ResponseEntity.ok(tareasService.modificarTarea(id, tareaDto));
+        }catch (NoSuchElementException e) {
+
+            String mensajeError = e.getMessage();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mensajeError);
+        }
     }
 
     @GetMapping("/{id}")

@@ -56,13 +56,12 @@ public class TareasServiceImpl implements TareasService {
 
 
     @Override
-    public Boolean eliminarTarea(Long id) {
+    public TareaDto eliminarTarea(Long id) {
 
-       return tareasRepository.findById(id).map(tarea -> {
-            tareasRepository.delete(tarea);
-            return true;
-        }).orElse(false);
+        Tarea elimarTarea = tareasRepository.findById(id).get();
 
+        tareasRepository.delete(elimarTarea);
+        return TareaMapper.INSTANCE.toDTO(elimarTarea);
     }
 
 
@@ -71,7 +70,7 @@ public class TareasServiceImpl implements TareasService {
     public TareaDto modificarTarea(Long id, TareaDto tareaDto) {
 
         Tarea tarea = TareaMapper.INSTANCE.toEntity(tareaDto);
-        Tarea modTarea = tareasRepository.findById(id).orElseThrow(() -> new NoSuchElementException("error "+id));
+        Tarea modTarea = tareasRepository.findById(id).orElseThrow(() -> new NoSuchElementException("No detectado: "+id));
 
 
          if (tarea.getNombreTarea() != null && !tarea.getNombreTarea().isEmpty())

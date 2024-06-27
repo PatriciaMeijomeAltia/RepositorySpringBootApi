@@ -15,7 +15,7 @@ public interface TareasService {
 
     TareaDto crearTarea(TareaDto tareaDto);
 
-    Boolean eliminarTarea(Long id) ;
+    TareaDto eliminarTarea(Long id) ;
 
     TareaDto modificarTarea(Long id, TareaDto tareaDto) ;
 
