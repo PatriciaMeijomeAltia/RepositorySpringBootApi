@@ -1,9 +1,6 @@
 package com.API.listaTareas.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,5 +19,11 @@ public class Tarea {
     private String personaAsignada;
     private String fechaInicio;
     private String fechaFin;
+
+
+
+    @ManyToOne
+    @JoinColumn(name = "idUSer") // Nombre de la columna en la tabla Tarea que es clave externa
+    private Usuario usuario;
 
 }

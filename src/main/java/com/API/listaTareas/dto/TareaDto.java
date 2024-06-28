@@ -1,8 +1,7 @@
 package com.API.listaTareas.dto;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.API.listaTareas.model.Usuario;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,5 +18,7 @@ public class TareaDto {
     private String personaAsignada;
     private String fechaInicio;
     private String fechaFin;
+
+    private Usuario usuario;
 
 }
