@@ -2,8 +2,6 @@ package com.API.listaTareas.controller;
 
 
 import com.API.listaTareas.dto.TareaDto;
-import com.API.listaTareas.exception.MensajeError;
-import com.API.listaTareas.model.Tarea;
 import com.API.listaTareas.service.TareasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

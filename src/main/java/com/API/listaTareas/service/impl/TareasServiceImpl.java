@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-//import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -49,7 +48,7 @@ public class TareasServiceImpl implements TareasService {
     public TareaDto crearTarea(TareaDto tareaDto) {
 
         return TareaMapper.INSTANCE.toDTO(tareasRepository.save(TareaMapper.INSTANCE.toEntity(tareaDto)));
-       // return "Tarea creada";
+        // return "Tarea creada";
 
     }
 
@@ -73,26 +72,26 @@ public class TareasServiceImpl implements TareasService {
         Tarea modTarea = tareasRepository.findById(id).orElseThrow(() -> new NoSuchElementException("No detectado: "+id));
 
 
-         if (tarea.getNombreTarea() != null && !tarea.getNombreTarea().isEmpty())
-             modTarea.setNombreTarea(tarea.getNombreTarea());
+        if (tarea.getNombreTarea() != null && !tarea.getNombreTarea().isEmpty())
+            modTarea.setNombreTarea(tarea.getNombreTarea());
 
-         if (tarea.getDescripcionTarea() != null && !tarea.getDescripcionTarea().isEmpty())
-             modTarea.setDescripcionTarea(tarea.getDescripcionTarea());
+        if (tarea.getDescripcionTarea() != null && !tarea.getDescripcionTarea().isEmpty())
+            modTarea.setDescripcionTarea(tarea.getDescripcionTarea());
 
-         if (tarea.getEstado() != null && !tarea.getEstado().isEmpty())
-             modTarea.setEstado(tarea.getEstado());
+        if (tarea.getEstado() != null && !tarea.getEstado().isEmpty())
+            modTarea.setEstado(tarea.getEstado());
 
-         if (tarea.getFechaFin() != null && !tarea.getFechaFin().isEmpty())
-             modTarea.setFechaFin(tarea.getFechaFin());
+        if (tarea.getFechaFin() != null && !tarea.getFechaFin().isEmpty())
+            modTarea.setFechaFin(tarea.getFechaFin());
 
-         if (tarea.getFechaInicio() != null && !tarea.getFechaInicio().isEmpty())
-             modTarea.setFechaInicio(tarea.getFechaInicio());
+        if (tarea.getFechaInicio() != null && !tarea.getFechaInicio().isEmpty())
+            modTarea.setFechaInicio(tarea.getFechaInicio());
 
-         if (tarea.getPersonaAsignada() != null && !tarea.getPersonaAsignada().isEmpty())
-             modTarea.setPersonaAsignada(tarea.getPersonaAsignada());
+        if (tarea.getPersonaAsignada() != null && !tarea.getPersonaAsignada().isEmpty())
+            modTarea.setPersonaAsignada(tarea.getPersonaAsignada());
 
 
-         return TareaMapper.INSTANCE.toDTO(tareasRepository.save(modTarea));
+        return TareaMapper.INSTANCE.toDTO(tareasRepository.save(modTarea));
 
 
 
