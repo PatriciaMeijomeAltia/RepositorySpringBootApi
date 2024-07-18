@@ -3,6 +3,10 @@ package com.API.listaTareas.controller;
 
 import com.API.listaTareas.dto.TareaDto;
 import com.API.listaTareas.service.TareasService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +23,12 @@ public class TareaController {
     private TareasService tareasService;
 
 
+    @Operation(summary = "Obtener todas las tareas", description = "Lista de tareas", tags={ "Listar Tareas" })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Consulta Generada Correctamente."),
+            @ApiResponse(responseCode = "204", description = "No se han encontrado datos."),
+            @ApiResponse(responseCode = "500", description = "Error en la consulta")
+    })
     @GetMapping
     public ResponseEntity<List<TareaDto>> verTareas() {
 

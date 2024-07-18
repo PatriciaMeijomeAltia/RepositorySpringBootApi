@@ -1,0 +1,194 @@
+openapi: 3.0.0
+info:
+  title: ListaTareas API
+  version: 1.0.0
+  description: API para gestionar tareas y usuarios en la aplicación ListaTareas.
+
+paths:
+  /lista_tareas:
+    get:
+      summary: Obtener todas las tareas
+      operationId: verTareas
+      responses:
+        '200':
+          description: Lista de tareas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TareaDto'
+    post:
+      summary: Crear una nueva tarea
+      operationId: crearTarea
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TareaDto'
+      responses:
+        '200':
+          description: Tarea creada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TareaDto'
+  /lista_tareas/{id}:
+    get:
+      summary: Obtener una tarea por ID
+      operationId: verTareaID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Consulta Generada Correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TareaDto'
+        '204':
+          description: No se han encontrado datos
+        '500':
+          description: Error en la consulta
+
+    delete:
+      summary: Eliminar una tarea por ID
+      operationId: eliminarTarea
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Tarea eliminada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TareaDto'
+    put:
+      summary: Modificar una tarea por ID
+      operationId: modificarTarea
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TareaDto'
+      responses:
+        '200':
+          description: Tarea modificada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TareaDto'
+        '404':
+          description: Tarea no encontrada
+
+  /usuarios:
+    get:
+      summary: Obtener todos los usuarios
+      operationId: verUsuario
+      responses:
+        '200':
+          description: Lista de usuarios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UsuarioDTO'
+    post:
+      summary: Crear un nuevo usuario
+      operationId: crearUsuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioDTO'
+      responses:
+        '200':
+          description: Usuario creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioDTO'
+  /usuarios/{id}:
+    delete:
+      summary: Eliminar un usuario por ID
+      operationId: eliminarUsuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Usuario eliminado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioDTO'
+    put:
+      summary: Modificar un usuario por ID
+      operationId: modificarUsuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioDTO'
+      responses:
+        '200':
+          description: Usuario modificado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioDTO'
+
+components:
+  schemas:
+    TareaDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        descripcion:
+          type: string
+        completada:
+          type: boolean
+        usuarioId:
+          type: integer
+          format: int64
+
+    UsuarioDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        nombre:
+          type: string
+        email:
+          type: string
