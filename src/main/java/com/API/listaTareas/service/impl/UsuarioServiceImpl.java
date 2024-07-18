@@ -1,9 +1,7 @@
 package com.API.listaTareas.service.impl;
 
 import com.API.listaTareas.dto.UsuarioDTO;
-import com.API.listaTareas.mapper.TareaMapper;
 import com.API.listaTareas.mapper.UsuarioMapper;
-import com.API.listaTareas.model.Tarea;
 import com.API.listaTareas.model.Usuario;
 import com.API.listaTareas.repository.UsuarioRepository;
 import com.API.listaTareas.service.UsuarioService;

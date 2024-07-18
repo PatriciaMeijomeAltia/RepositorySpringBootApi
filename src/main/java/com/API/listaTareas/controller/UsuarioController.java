@@ -1,11 +1,8 @@
 package com.API.listaTareas.controller;
 
+
 import com.API.listaTareas.dto.UsuarioDTO;
-import com.API.listaTareas.repository.UsuarioRepository;
-import com.API.listaTareas.service.TareasService;
 import com.API.listaTareas.service.UsuarioService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +20,7 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity<UsuarioDTO>crearusuario(@RequestBody UsuarioDTO usuarioDTO){
+        System.out.println("JSON recibido: " + usuarioDTO);
         return ResponseEntity.ok(usuarioService.crearUser(usuarioDTO));
     }
 
@@ -38,7 +36,7 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.modificarUser(id,usuarioDTO));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping()
     public ResponseEntity<List<UsuarioDTO>>verusuario(){
 
         return ResponseEntity.ok(usuarioService.mostrarUser());
