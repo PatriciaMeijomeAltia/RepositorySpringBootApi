@@ -12,11 +12,11 @@ import java.util.List;
 @NoArgsConstructor
 public class UsuarioDTO {
 
-    private Long idUser;
+    private Long id;
     @JsonProperty("nombreUser")
-    private String nombreUser;
+    private String nombre;
     @JsonProperty("telefonoUser")
-    private String telefonoUser;
+    private String telefono;
 
     private List<TareaDto> tareas;
 }

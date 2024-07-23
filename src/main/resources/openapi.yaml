@@ -126,6 +126,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UsuarioDTO'
+
   /usuarios/{id}:
     delete:
       summary: Eliminar un usuario por ID
@@ -178,9 +179,8 @@ components:
           type: string
         completada:
           type: boolean
-        usuarioId:
-          type: integer
-          format: int64
+        usuario:
+          $ref: '#/components/schemas/UsuarioDTO'
 
     UsuarioDTO:
       type: object
@@ -190,5 +190,5 @@ components:
           format: int64
         nombre:
           type: string
-        email:
+        telefono:
           type: string

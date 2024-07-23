@@ -1,8 +1,10 @@
 package com.API.listaTareas.service;
 
 
-import com.API.listaTareas.dto.TareaDto;
+//import com.API.listaTareas.dto.TareaDto;
 
+
+import com.baeldung.openapi.model.TareaDto;
 
 import java.util.List;
 
@@ -11,13 +13,13 @@ public interface TareasService {
 
     List <TareaDto> obtenerTareas();
 
-    TareaDto obtenerTareaPorId(Long id) ;
+    TareaDto obtenerTareaPorId(Integer id) ;
 
     TareaDto crearTarea(TareaDto tareaDto);
 
-    TareaDto eliminarTarea(Long id) ;
+    TareaDto eliminarTarea(Integer id) ;
 
-    TareaDto modificarTarea(Long id, TareaDto tareaDto) ;
+    TareaDto modificarTarea(Integer id, TareaDto tareaDto) ;
 
 
 
