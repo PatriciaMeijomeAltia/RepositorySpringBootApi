@@ -18,6 +18,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/TareaDto'
+        '404':
+          description: Lista sin usuarios
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorJson'
     post:
       summary: Crear una nueva tarea
       operationId: crearTarea
@@ -55,6 +61,10 @@ paths:
           description: No se han encontrado datos
         '500':
           description: Error en la consulta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorJson'
 
     delete:
       summary: Eliminar una tarea por ID
@@ -72,6 +82,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TareaDto'
+        '500':
+          description: Tarea no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorJson'
     put:
       summary: Modificar una tarea por ID
       operationId: modificarTarea
@@ -94,8 +110,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TareaDto'
-        '404':
+        '500':
           description: Tarea no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorJson'
 
   /usuarios:
     get:
@@ -110,6 +130,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/UsuarioDTO'
+        '404':
+          description: Lista sin usuarios
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorJson'
     post:
       summary: Crear un nuevo usuario
       operationId: crearUsuario
@@ -126,7 +152,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UsuarioDTO'
-
+        '500':
+          description: Usuario no creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorJson'
   /usuarios/{id}:
     delete:
       summary: Eliminar un usuario por ID
@@ -144,6 +175,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UsuarioDTO'
+        '500':
+          description: Id usuario no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorJson'
     put:
       summary: Modificar un usuario por ID
       operationId: modificarUsuario
@@ -166,7 +203,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UsuarioDTO'
-
+        '500':
+          description: Id usuario no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorJson'
 components:
   schemas:
     TareaDto:
@@ -191,4 +233,12 @@ components:
         nombre:
           type: string
         telefono:
+          type: string
+
+    ErrorJson:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
           type: string

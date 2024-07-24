@@ -1,20 +1,10 @@
 package com.API.listaTareas.exception;
 
-public class MensajeError {
 
-    private String message;
+public class MensajeError extends RuntimeException{
 
     public MensajeError(String message) {
-        this.message = message;
+        super(message);
     }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
 
 }

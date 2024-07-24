@@ -2,6 +2,7 @@ package com.API.listaTareas.service.impl;
 
 
 //import com.API.listaTareas.dto.TareaDto;
+import com.API.listaTareas.exception.MensajeError;
 import com.API.listaTareas.mapper.TareaMapper;
 import com.API.listaTareas.model.Tarea;
 import com.API.listaTareas.service.TareasService;
@@ -11,6 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -27,12 +29,15 @@ public class TareasServiceImpl implements TareasService {
     public List<TareaDto> obtenerTareas() {
 
         List<Tarea> tareas = tareasRepository.findAll();
+
+        if (tareas == null || tareas.isEmpty()) {
+            throw new MensajeError("No se encontraron tareas");
+        }
         return TareaMapper.INSTANCE.toDtoList(tareas);
 
     }
 
     @Override
-
     public TareaDto obtenerTareaPorId(Integer id) {
 
         Optional<Tarea> tareaOptional = tareasRepository.findById(id);

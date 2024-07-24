@@ -66,7 +66,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             modUser.setTelefono(usuario.getTelefono());
 
         // Guardar la entidad en el repositorio
-        Usuario savedUsuario = usuarioRepository.save (usuario);
+        Usuario savedUsuario = usuarioRepository.save (modUser);
 
         // Mapear la entidad guardada de vuelta al DTO
         UsuarioDTO resultDto = UsuarioMapper.INSTANCE.toDto(savedUsuario);
