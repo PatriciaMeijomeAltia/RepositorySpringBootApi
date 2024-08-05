@@ -15,9 +15,9 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUser;
-    private String nombreUser;
-    private String telefonoUser;
+    private Integer id;
+    private String nombre;
+    private String telefono;
 
     //relacion con Tarea
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

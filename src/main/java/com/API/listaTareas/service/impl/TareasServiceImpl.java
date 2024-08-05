@@ -1,15 +1,18 @@
 package com.API.listaTareas.service.impl;
 
 
-import com.API.listaTareas.dto.TareaDto;
+//import com.API.listaTareas.dto.TareaDto;
+import com.API.listaTareas.exception.MensajeError;
 import com.API.listaTareas.mapper.TareaMapper;
 import com.API.listaTareas.model.Tarea;
 import com.API.listaTareas.service.TareasService;
 import com.API.listaTareas.repository.TareasRepository;
+import com.baeldung.openapi.model.TareaDto;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -26,18 +29,18 @@ public class TareasServiceImpl implements TareasService {
     public List<TareaDto> obtenerTareas() {
 
         List<Tarea> tareas = tareasRepository.findAll();
+
+        if (tareas == null || tareas.isEmpty()) {
+            throw new MensajeError("No se encontraron tareas");
+        }
         return TareaMapper.INSTANCE.toDtoList(tareas);
 
     }
 
     @Override
+    public TareaDto obtenerTareaPorId(Integer id) {
 
-    public TareaDto obtenerTareaPorId(Long id) {
-
-        Optional<Tarea> tareaOptional = tareasRepository.findById(id);
-
-        Tarea tarea = tareaOptional.orElseThrow(() ->
-                new NoSuchElementException("Tarea con el ID :" + id+ "no existe"));
+        Tarea tarea = tareasRepository.findById(id).orElseThrow(() -> new MensajeError("Tarea con el ID :" + id+ " no existe"));
 
         return TareaMapper.INSTANCE.toDTO(tarea);
 
@@ -48,52 +51,40 @@ public class TareasServiceImpl implements TareasService {
     public TareaDto crearTarea(TareaDto tareaDto) {
 
         return TareaMapper.INSTANCE.toDTO(tareasRepository.save(TareaMapper.INSTANCE.toEntity(tareaDto)));
-        // return "Tarea creada";
+
 
     }
 
 
 
     @Override
-    public TareaDto eliminarTarea(Long id) {
+    public TareaDto eliminarTarea(Integer id) {
 
-        Tarea elimarTarea = tareasRepository.findById(id).get();
+        Tarea eliminarTarea = tareasRepository.findById(id)
+                .orElseThrow(() -> new MensajeError("Tarea no encontrada"));
 
-        tareasRepository.delete(elimarTarea);
-        return TareaMapper.INSTANCE.toDTO(elimarTarea);
+        //Tarea elimarTarea = tareasRepository.findById(id).get();
+
+        tareasRepository.delete(eliminarTarea);
+        return TareaMapper.INSTANCE.toDTO(eliminarTarea);
     }
 
 
     @Override
-
-    public TareaDto modificarTarea(Long id, TareaDto tareaDto) {
+    public TareaDto modificarTarea(Integer id, TareaDto tareaDto) {
 
         Tarea tarea = TareaMapper.INSTANCE.toEntity(tareaDto);
-        Tarea modTarea = tareasRepository.findById(id).orElseThrow(() -> new NoSuchElementException("No detectado: "+id));
+        Tarea modTarea = tareasRepository.findById(id).orElseThrow(() -> new MensajeError("No detectado: "+id));
 
 
-        if (tarea.getNombreTarea() != null && !tarea.getNombreTarea().isEmpty())
-            modTarea.setNombreTarea(tarea.getNombreTarea());
+        if (tarea.getCompletada() != null )
+            modTarea.setCompletada(tarea.getCompletada());
 
-        if (tarea.getDescripcionTarea() != null && !tarea.getDescripcionTarea().isEmpty())
-            modTarea.setDescripcionTarea(tarea.getDescripcionTarea());
-
-        if (tarea.getEstado() != null && !tarea.getEstado().isEmpty())
-            modTarea.setEstado(tarea.getEstado());
-
-        if (tarea.getFechaFin() != null && !tarea.getFechaFin().isEmpty())
-            modTarea.setFechaFin(tarea.getFechaFin());
-
-        if (tarea.getFechaInicio() != null && !tarea.getFechaInicio().isEmpty())
-            modTarea.setFechaInicio(tarea.getFechaInicio());
-
-        if (tarea.getPersonaAsignada() != null && !tarea.getPersonaAsignada().isEmpty())
-            modTarea.setPersonaAsignada(tarea.getPersonaAsignada());
+        if (tarea.getDescripcion() != null && !tarea.getDescripcion().isEmpty())
+            modTarea.setDescripcion(tarea.getDescripcion());
 
 
         return TareaMapper.INSTANCE.toDTO(tareasRepository.save(modTarea));
-
-
 
     }
 }

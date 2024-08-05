@@ -12,15 +12,9 @@ import lombok.NoArgsConstructor;
 public class Tarea {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idTarea;
-    private String nombreTarea;
-    private String descripcionTarea;
-    private String estado;
-    private String personaAsignada;
-    private String fechaInicio;
-    private String fechaFin;
-
-
+    private Integer id;
+    private String descripcion;
+    private Boolean completada;
 
     @ManyToOne
     @JoinColumn(name = "idUSer") // Nombre de la columna en la tabla Tarea que es clave externa

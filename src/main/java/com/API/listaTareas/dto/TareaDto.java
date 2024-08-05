@@ -11,13 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TareaDto {
 
-    private Long idTarea;
-    private String nombreTarea;
-    private String descripcionTarea;
-    private String estado;
-    private String personaAsignada;
-    private String fechaInicio;
-    private String fechaFin;
+    private Integer id;
+    private String descripcion;
+    private Boolean completada;
 
     private Usuario usuario;
 

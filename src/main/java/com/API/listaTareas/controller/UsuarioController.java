@@ -1,9 +1,10 @@
 package com.API.listaTareas.controller;
 
 
-import com.API.listaTareas.dto.UsuarioDTO;
-import com.API.listaTareas.service.UsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
+//import com.API.listaTareas.dto.UsuarioDTO;
+import com.baeldung.openapi.api.UsuariosApi;
+import com.baeldung.openapi.api.UsuariosApiDelegate;
+import com.baeldung.openapi.model.UsuarioDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,34 +13,38 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")
-public class UsuarioController {
+public class UsuarioController implements UsuariosApi{
 
-    @Autowired
-    private UsuarioService usuarioService;
+    private  UsuariosApiDelegate usuariosApiDelegate;
 
-
-    @PostMapping
-    public ResponseEntity<UsuarioDTO>crearusuario(@RequestBody UsuarioDTO usuarioDTO){
-        System.out.println("JSON recibido: " + usuarioDTO);
-        return ResponseEntity.ok(usuarioService.crearUser(usuarioDTO));
+    public UsuarioController(UsuariosApiDelegate usuariosApiDelegate) {
+        this.usuariosApiDelegate = usuariosApiDelegate;
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<UsuarioDTO>eliminarusuario(@PathVariable Long id){
+    @PostMapping
+    public ResponseEntity<UsuarioDTO> crearUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+        return usuariosApiDelegate.crearUsuario(usuarioDTO);
+    }
 
-        return ResponseEntity.ok(usuarioService.eliminarUser(id));
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<UsuarioDTO>eliminarUsuario(@PathVariable Integer id){
+
+       return usuariosApiDelegate.eliminarUsuario(id);
+
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UsuarioDTO>modificarusuario(@RequestBody UsuarioDTO usuarioDTO,@PathVariable Long id){
+    public ResponseEntity<UsuarioDTO>modificarUsuario(@PathVariable Integer id,@RequestBody UsuarioDTO usuarioDTO){
 
-        return ResponseEntity.ok(usuarioService.modificarUser(id,usuarioDTO));
+        return usuariosApiDelegate.modificarUsuario(id,usuarioDTO);
+
     }
 
-    @GetMapping()
-    public ResponseEntity<List<UsuarioDTO>>verusuario(){
+    @GetMapping
+    public ResponseEntity<List<UsuarioDTO>>verUsuario() {
 
-        return ResponseEntity.ok(usuarioService.mostrarUser());
+        return usuariosApiDelegate.verUsuario();
     }
 
 }

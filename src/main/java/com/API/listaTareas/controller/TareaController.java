@@ -1,67 +1,51 @@
 package com.API.listaTareas.controller;
 
-
-import com.API.listaTareas.dto.TareaDto;
-import com.API.listaTareas.service.TareasService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import com.baeldung.openapi.api.ListaTareasApi;
+import com.baeldung.openapi.api.ListaTareasApiDelegate;
+import com.baeldung.openapi.model.TareaDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/lista_tareas")
-public class TareaController {
+public class TareaController implements ListaTareasApi {
 
-    @Autowired
-    private TareasService tareasService;
 
+    private ListaTareasApiDelegate listaTareasApiDelegate;
+
+    public TareaController(ListaTareasApiDelegate listaTareasApiDelegate) {
+        this.listaTareasApiDelegate = listaTareasApiDelegate;
+    }
 
     @GetMapping
     public ResponseEntity<List<TareaDto>> verTareas() {
 
-        return ResponseEntity.ok(tareasService.obtenerTareas());
+        return listaTareasApiDelegate.verTareas();
     }
 
     @PostMapping
     public ResponseEntity<TareaDto> crearTarea(@RequestBody TareaDto tareaDto ) {
 
-        return ResponseEntity.ok(tareasService.crearTarea(tareaDto));
+        return listaTareasApiDelegate.crearTarea(tareaDto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<TareaDto> eliminarTarea(@PathVariable long id ) {
+    public ResponseEntity<TareaDto> eliminarTarea(@PathVariable Integer id ) {
 
-        return ResponseEntity.ok(tareasService.eliminarTarea(id));
+        return listaTareasApiDelegate.eliminarTarea(id);
+
     }
 
     @PutMapping ("/{id}")
-    public ResponseEntity<?> modificarTarea(@PathVariable long id,@RequestBody TareaDto tareaDto ) {
+    public ResponseEntity<TareaDto> modificarTarea(@PathVariable Integer id,@RequestBody TareaDto tareaDto ) {
+            return listaTareasApiDelegate.modificarTarea(id,tareaDto);
 
-        try {
-            return ResponseEntity.ok(tareasService.modificarTarea(id, tareaDto));
-        }catch (NoSuchElementException e) {
-
-            String mensajeError = e.getMessage();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mensajeError);
-        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TareaDto> verTareaID(@PathVariable long id ) {
-
-
-        try {
-            TareaDto tarea = tareasService.obtenerTareaPorId(id);
-
-            return ResponseEntity.ok(tarea);
-
-        } catch (NoSuchElementException e) {
-
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<TareaDto> verTareaID(@PathVariable Integer id ) {
+        return listaTareasApiDelegate.verTareaID(id);
     }
 
 }
