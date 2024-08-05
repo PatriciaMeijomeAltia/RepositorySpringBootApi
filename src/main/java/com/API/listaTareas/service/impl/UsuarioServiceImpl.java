@@ -1,6 +1,7 @@
 package com.API.listaTareas.service.impl;
 
 //import com.API.listaTareas.dto.UsuarioDTO;
+import com.API.listaTareas.exception.MensajeError;
 import com.API.listaTareas.mapper.UsuarioMapper;
 import com.API.listaTareas.model.Usuario;
 import com.API.listaTareas.repository.UsuarioRepository;
@@ -57,7 +58,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         // Mapear el DTO a la entidad
         Usuario usuario = UsuarioMapper.INSTANCE.toEntity(usuarioDTO);
 
-        Usuario modUser = usuarioRepository.findById(Id).orElseThrow(() -> new NoSuchElementException("No detectado: "+Id));
+        Usuario modUser = usuarioRepository.findById(Id).orElseThrow(() -> new MensajeError("No detectado: "+Id));
 
         if (usuario.getNombre() != null && !usuario.getNombre() .isEmpty())
             modUser.setNombre(usuario.getNombre());
@@ -80,6 +81,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 
         List<Usuario> listausers = usuarioRepository.findAll();
+
+        if (listausers.isEmpty()) {
+            throw new MensajeError("No hay usuarios disponibles");
+        }
 
         // Mapear la entidad guardada de vuelta al DTO
         List<UsuarioDTO> resultDto = UsuarioMapper.INSTANCE.toDtoList(listausers);

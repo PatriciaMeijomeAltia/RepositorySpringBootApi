@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class UsuarioDTO {
 
-    private Long id;
+    private Integer id;
     @JsonProperty("nombreUser")
     private String nombre;
     @JsonProperty("telefonoUser")

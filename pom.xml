@@ -108,69 +108,143 @@
 			<version>2.5.0</version>
 		</dependency>
 
+		<!-- JUnit 5 dependency -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.9.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.9.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Mockito dependency -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>3.9.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Spring Test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<version>2.7.0</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
+
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+	<plugins>
+		<plugin>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId>
+		</plugin>
 
-			<!--MapStruct-->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-				<configuration>
-					<source>18</source>
-					<target>18</target>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>org.mapstruct</groupId>
-							<artifactId>mapstruct-processor</artifactId>
-							<version>1.6.0.Beta1</version>
-						</path>
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-							<version>1.18.28</version>
-						</path>
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok-mapstruct-binding</artifactId>
-							<version>0.2.0</version>
-						</path>
+		<!--MapStruct-->
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.8.1</version>
+			<configuration>
+				<source>18</source>
+				<target>18</target>
+				<annotationProcessorPaths>
+					<path>
+						<groupId>org.mapstruct</groupId>
+						<artifactId>mapstruct-processor</artifactId>
+						<version>1.6.0.Beta1</version>
+					</path>
+					<path>
+						<groupId>org.projectlombok</groupId>
+						<artifactId>lombok</artifactId>
+						<version>1.18.28</version>
+					</path>
+					<path>
+						<groupId>org.projectlombok</groupId>
+						<artifactId>lombok-mapstruct-binding</artifactId>
+						<version>0.2.0</version>
+					</path>
 
-					</annotationProcessorPaths>
-				</configuration>
-			</plugin>
+				</annotationProcessorPaths>
+			</configuration>
+		</plugin>
 
-			<!-- OpenAPI Generator -->
-			<plugin>
-				<groupId>org.openapitools</groupId>
-				<artifactId>openapi-generator-maven-plugin</artifactId>
-				<version>7.3.0</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<inputSpec>src/main/resources/openapi.yaml</inputSpec>
-							<generatorName>spring</generatorName>
-							<apiPackage>com.baeldung.openapi.api</apiPackage>
-							<modelPackage>com.baeldung.openapi.model</modelPackage>
-							<supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
-							<configOptions>
-								<delegatePattern>true</delegatePattern>
-							</configOptions>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+		<!-- OpenAPI Generator -->
+		<plugin>
+			<groupId>org.openapitools</groupId>
+			<artifactId>openapi-generator-maven-plugin</artifactId>
+			<version>7.3.0</version>
+			<executions>
+				<execution>
+					<goals>
+						<goal>generate</goal>
+					</goals>
+					<configuration>
+						<inputSpec>src/main/resources/openapi.yaml</inputSpec>
+						<generatorName>spring</generatorName>
+						<apiPackage>com.baeldung.openapi.api</apiPackage>
+						<modelPackage>com.baeldung.openapi.model</modelPackage>
+						<supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
+						<configOptions>
+							<delegatePattern>true</delegatePattern>
+						</configOptions>
+					</configuration>
+				</execution>
+			</executions>
+		</plugin>
 
-		</plugins>
+		<!-- JaCoCo -->
+
+		<plugin>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>
+			<version>0.8.8</version>
+			<executions>
+				<execution>
+					<goals>
+						<goal>prepare-agent</goal>
+					</goals>
+				</execution>
+				<execution>
+					<id>report</id>
+					<phase>prepare-package</phase>
+					<goals>
+						<goal>report</goal>
+					</goals>
+				</execution>
+
+				<execution>
+					<id>jacoco-check</id>
+					<goals>
+						<goal>check</goal>
+					</goals>
+					<configuration>
+						<rules>
+							<rule>
+								<element>PACKAGE</element>
+								<limits>
+									<limit>
+										<counter>LINE</counter>
+										<value>COVEREDRATIO</value>
+										<minimum>0.50</minimum>
+									</limit>
+								</limits>
+							</rule>
+						</rules>
+					</configuration>
+				</execution>
+			</executions>
+		</plugin>
+
+	</plugins>
 	</build>
 
 </project>

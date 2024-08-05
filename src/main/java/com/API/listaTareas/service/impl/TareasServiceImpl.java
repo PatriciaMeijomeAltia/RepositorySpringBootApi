@@ -40,10 +40,7 @@ public class TareasServiceImpl implements TareasService {
     @Override
     public TareaDto obtenerTareaPorId(Integer id) {
 
-        Optional<Tarea> tareaOptional = tareasRepository.findById(id);
-
-        Tarea tarea = tareaOptional.orElseThrow(() ->
-                new NoSuchElementException("Tarea con el ID :" + id+ "no existe"));
+        Tarea tarea = tareasRepository.findById(id).orElseThrow(() -> new MensajeError("Tarea con el ID :" + id+ " no existe"));
 
         return TareaMapper.INSTANCE.toDTO(tarea);
 
@@ -54,7 +51,7 @@ public class TareasServiceImpl implements TareasService {
     public TareaDto crearTarea(TareaDto tareaDto) {
 
         return TareaMapper.INSTANCE.toDTO(tareasRepository.save(TareaMapper.INSTANCE.toEntity(tareaDto)));
-        // return "Tarea creada";
+
 
     }
 
@@ -63,10 +60,13 @@ public class TareasServiceImpl implements TareasService {
     @Override
     public TareaDto eliminarTarea(Integer id) {
 
-        Tarea elimarTarea = tareasRepository.findById(id).get();
+        Tarea eliminarTarea = tareasRepository.findById(id)
+                .orElseThrow(() -> new MensajeError("Tarea no encontrada"));
 
-        tareasRepository.delete(elimarTarea);
-        return TareaMapper.INSTANCE.toDTO(elimarTarea);
+        //Tarea elimarTarea = tareasRepository.findById(id).get();
+
+        tareasRepository.delete(eliminarTarea);
+        return TareaMapper.INSTANCE.toDTO(eliminarTarea);
     }
 
 
@@ -74,10 +74,10 @@ public class TareasServiceImpl implements TareasService {
     public TareaDto modificarTarea(Integer id, TareaDto tareaDto) {
 
         Tarea tarea = TareaMapper.INSTANCE.toEntity(tareaDto);
-        Tarea modTarea = tareasRepository.findById(id).orElseThrow(() -> new NoSuchElementException("No detectado: "+id));
+        Tarea modTarea = tareasRepository.findById(id).orElseThrow(() -> new MensajeError("No detectado: "+id));
 
 
-        if (tarea.getCompletada() != null && !tarea.getCompletada())
+        if (tarea.getCompletada() != null )
             modTarea.setCompletada(tarea.getCompletada());
 
         if (tarea.getDescripcion() != null && !tarea.getDescripcion().isEmpty())
@@ -85,8 +85,6 @@ public class TareasServiceImpl implements TareasService {
 
 
         return TareaMapper.INSTANCE.toDTO(tareasRepository.save(modTarea));
-
-
 
     }
 }

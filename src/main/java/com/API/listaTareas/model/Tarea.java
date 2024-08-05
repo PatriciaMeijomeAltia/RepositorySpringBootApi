@@ -16,8 +16,6 @@ public class Tarea {
     private String descripcion;
     private Boolean completada;
 
-
-
     @ManyToOne
     @JoinColumn(name = "idUSer") // Nombre de la columna en la tabla Tarea que es clave externa
     private Usuario usuario;
